@@ -1,0 +1,10 @@
+altair
+pandas
+streamlit
+plotly
+matplotlib
+pyvi
+wordcloud
+scikit-learn
+google-genai
+playwright

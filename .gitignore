@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Environment / Secrets - KHONG PUSH LEN GITHUB
+.env
+.env.*
+
+# Debug / Temp files
+*.html
+debug_*.py
+test_*.py
+analyze_*.py
+
+# Data files (tuỳ chọn - bỏ comment nếu không muốn push data)
+*.csv
+generated/
+threads_storage_state.json
+*.png
