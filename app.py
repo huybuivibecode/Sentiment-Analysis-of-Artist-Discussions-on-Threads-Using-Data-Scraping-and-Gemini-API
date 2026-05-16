@@ -29,6 +29,16 @@ from threads.threads_runner import comments_to_dataframe, get_threads_data, post
 
 st.set_page_config(page_title="Social Sentiment App", layout="wide")
 
+import subprocess
+@st.cache_resource
+def install_playwright():
+    try:
+        subprocess.run([sys.executable, "-m", "playwright", "install", "chromium"], check=True)
+    except Exception as e:
+        print(f"Lỗi cài đặt Playwright: {e}")
+
+install_playwright()
+
 DATA_DIR = Path("generated")
 DATA_DIR.mkdir(exist_ok=True)
 
