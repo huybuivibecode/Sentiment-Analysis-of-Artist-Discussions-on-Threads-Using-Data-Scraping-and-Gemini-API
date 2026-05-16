@@ -22,12 +22,13 @@ current_key_index = 0
 
 def build_client():
     global current_key_index
-    if not GEMINI_API_KEYS:
+    valid_keys = [k for k in GEMINI_API_KEYS if k.strip()]
+    if not valid_keys:
         api_key = os.getenv("GEMINI_API_KEY", "").strip()
         if not api_key:
-            raise RuntimeError("Chua co GEMINI_API_KEYS trong gemini_sentiment.py hoac bien moi truong.")
+            return None
     else:
-        api_key = GEMINI_API_KEYS[current_key_index].strip()
+        api_key = valid_keys[current_key_index].strip()
         
     return genai.Client(api_key=api_key)
 
@@ -347,7 +348,12 @@ def analyze_comments(
 
     if records_to_process:
         client = build_client()
-        batch_iterator = list(chunk_records(records_to_process, batch_size=batch_size))
+        if client is None:
+            print("[!] Khong co API key, bo qua phan tich sentiment. Chi luu data raw.")
+            batch_iterator = []
+        else:
+            batch_iterator = list(chunk_records(records_to_process, batch_size=batch_size))
+            
         i = 0
         while i < len(batch_iterator):
             batch_records = batch_iterator[i]
@@ -401,6 +407,12 @@ def analyze_comments(
         right_on="id",
         how="left",
     ).drop(columns=["_record_id", "id"])
+
+    for col in ["sentiment", "emotion", "topic", "rationale"]:
+        if col in merged_df.columns:
+            merged_df[col] = merged_df[col].fillna("")
+    if "controversy" in merged_df.columns:
+        merged_df["controversy"] = merged_df["controversy"].fillna(False)
 
     return merged_df
 
