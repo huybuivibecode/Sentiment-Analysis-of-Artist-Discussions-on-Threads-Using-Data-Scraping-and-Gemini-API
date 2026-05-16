@@ -1,6 +1,7 @@
 # Social Sentiment Studio (SentimentAnalytist)
 **Tác giả: Bùi Quang Huy**
 **Liên hệ: buiquanghuy352k5@gmail.com**
+
 Dự án này là một công cụ toàn diện giúp cào dữ liệu (scrape) bình luận từ nền tảng **Threads** (ví dụ: về một người nổi tiếng, một chủ đề cụ thể), tiền xử lý ngôn ngữ tự nhiên (NLP), và thực hiện phân tích cảm xúc (Sentiment Analysis) sử dụng **Google Gemini API**. 
 
 Ứng dụng cung cấp một giao diện người dùng trực quan qua **Streamlit** để thực hiện cào dữ liệu, cũng như phân tích và trực quan hóa dữ liệu theo thời gian thực (ví dụ như biểu đồ tròn, biểu đồ cột, Treemap, Word Cloud, phân tích Bigram).
